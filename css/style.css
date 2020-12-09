@@ -142,3 +142,23 @@ select{
 text-decoration: none;
 text-align: center;
 }
+
+@media only screen and (max-width: 960px){
+    .form{
+        width: 85%;
+        padding: 44px 20px;
+    }
+}
+
+@media only screen and (max-width: 600px){
+    .form{
+        margin-top: 10px;
+    }
+    .row {
+        flex-direction: column;
+    }
+    .buttonParent{
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+}
