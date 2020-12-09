@@ -93,11 +93,16 @@ label{
 .row-content span{
     display: block;
 }
- error-output{
+ #text-error{
      margin-left: 22%;
     font-size: 12px;
     font-style: italic;
     color: red;
+}
+#date-error{
+    font-size: 12px;
+    font-style: italic;
+    color: red; 
 }
 .profile-radio-content {
     display: inline-flex;
