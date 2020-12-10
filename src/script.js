@@ -10,7 +10,7 @@ class EmployeePayrollData {
     return this._name;
   }
   set name(name) {
-    let nameRegex = "/^[A-Z]{1}[a-zA-Z\\s]{2,}$/";
+    let nameRegex = new RegExp(/^[A-Z]{1}[a-z ]{2,}$/);
     if (nameRegex.test(name)) this._name = name;
     else throw "Name is Incorrect!";
   }
@@ -30,17 +30,17 @@ class EmployeePayrollData {
   }
 
   get department() {
-    return this.department;
+    return this._department;
   }
   set department(department) {
     this._department = department;
   }
 
   get salary() {
-    return this.salary;
+    return this._salary;
   }
   set salary(salary) {
-    this.salary = salary;
+    this._salary = salary;
   }
 
   get note() {
@@ -51,35 +51,15 @@ class EmployeePayrollData {
   }
 
   get startDate() {
-    return this.startDate;
+    return this._startDate;
   }
   set startDate(startDate) {
-    this.startDate = startDate;
+    this._startDate = startDate;
   }
 
   toString() {
-    const options = { year: "numeric", month: "long", day: "numeric" };
-    const empDate = !this.startDate
-      ? "undefined"
-      : this.startDate.toLocaleDateString("en-US", options);
-    return (
-      "id=" +
-      this.id +
-      " name=" +
-      this.name +
-      ", gender=" +
-      this.gender +
-      ", profilePic=" +
-      this.profilePic +
-      ", department=" +
-      this.department +
-      ", salary=" +
-      this.salary +
-      ", startDate=" +
-      empDate +
-      ", note=" +
-      this.note
-    );
+    // const options = { year: "numeric", month: "long", day: "numeric" };
+    return ("id=" +this.id + " name=" + this.name + ", gender=" + this.gender +", profilePic=" + this.profilePic + ", department=" + this.department + ", salary=" + this.salary +", startDate=" + this.startDate + ", note=" + this.note );
   }
 }
 
@@ -116,6 +96,55 @@ window.addEventListener("DOMContentLoaded", (event) => {
     } else {
       dateError.textContent = "";
     }
+  };
+  
+  const save = () => {
+    try {
+      let employeePayrollData = creaateEmployeePayroll();
+    //   createAndUpdateStorage(employeePayrollData);
+    } catch (e) {
+      return;
+    }
+  };
+  
+const creaateEmployeePayroll = () => {
+    let employeePayrollData = new EmployeePayrollData();
+    try {
+      employeePayrollData.name = getInputValueById("#name");
+    } catch (e) {
+      setTextValue(".text-error", e);
+      throw e;
+    }
+    employeePayrollData.profilePic = getSelectedValues("[name=profile]").pop();
+    employeePayrollData.gender = getSelectedValues("[name=gender]").pop();
+    employeePayrollData.department = getSelectedValues("[name=department]");
+    employeePayrollData.salary = getInputValueById("#salary");
+    employeePayrollData.note = getInputValueById("#notes");
+    let date = getInputValueById("#day") + " " + getInputValueById("#month") + " " +getInputValueById("#year");
+    employeePayrollData.date = Date.parse(date);
+    alert(employeePayrollData.toString());
+    return employeePayrollData;
+  };
+  
+const getSelectedValues = (propertyValue) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    let selItems = [];
+    allItems.forEach(item => {
+      if (item.checked) {
+          selItems.push(item.value);
+        }
+    });
+    return selItems;
+  };
+  
+  const getInputValueById = (id) => {
+    let value = document.querySelector(id).value;
+    return value;
+  };
+  
+  const getInputElementValue = (id) => {
+    let value = document.getElementById(id).value;
+    return value;
   };
   
   
