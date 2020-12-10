@@ -106,17 +106,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       return;
     }
   };
-
-  function createAndUpdateStorage(employeePayrollData) {
-    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
-    if (employeePayrollList != undefined) {
-      employeePayrollList.push(employeePayrollData);
-    } else {
-      employeePayrollList = [employeePayrollData];
-    }
-    alert(employeePayrollList.toString());
-    localStorage.setItem( "EmployeePayrollList", JSON.stringify(employeePayrollList));
-  }
   
 const creaateEmployeePayroll = () => {
     let employeePayrollData = new EmployeePayrollData();
@@ -159,3 +148,42 @@ const getSelectedValues = (propertyValue) => {
   };
   
   
+  function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if (employeePayrollList != undefined) {
+      employeePayrollList.push(employeePayrollData);
+    } else {
+      employeePayrollList = [employeePayrollData];
+    }
+    alert(employeePayrollList.toString());
+    localStorage.setItem( "EmployeePayrollList", JSON.stringify(employeePayrollList));
+  }
+
+resetForm = () => {
+    setValue('#name', '');
+    unsetSelectedValues('[name=profile]');
+    unsetSelectedValues('[name=gender]');
+    unsetSelectedValues('[name=department]');
+    setValue('#salary','');
+    setValue('#notes','');
+    setValue('#day','01');
+    setValue('#month','01');
+    setValue('#year','2020');
+}
+
+unsetSelectedValues = (propertyValue) => {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        item.checked = false;
+    });
+}
+
+setTextValue = (id,value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
+}
+
+setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
+}
