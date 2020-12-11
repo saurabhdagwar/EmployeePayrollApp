@@ -120,8 +120,8 @@ const creaateEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues("[name=department]");
     employeePayrollData.salary = getInputValueById("#salary");
     employeePayrollData.note = getInputValueById("#notes");
-    let date = getInputValueById("#day") + " " + getInputValueById("#month") + " " +getInputValueById("#year");
-    employeePayrollData.date = Date.parse(date);
+    let date = `${getInputValueById("#day")}/${getInputValueById("#month")}/${getInputValueById("#year")}`;
+    employeePayrollData.date = date;
     alert(employeePayrollData.toString());
     return employeePayrollData;
   };
@@ -146,7 +146,6 @@ const getSelectedValues = (propertyValue) => {
     let value = document.getElementById(id).value;
     return value;
   };
-  
   
   function createAndUpdateStorage(employeePayrollData) {
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
