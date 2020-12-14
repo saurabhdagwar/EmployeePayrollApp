@@ -147,3 +147,9 @@ td img{
 #table-display img{
     height: 25px;
 }
+#table-display button{
+    border: none;
+    background: none;
+    padding: 0 0 0 0 ;
+    float: right;
+}

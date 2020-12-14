@@ -58,7 +58,6 @@ class EmployeePayrollData {
   }
 
   toString() {
-    // const options = { year: "numeric", month: "long", day: "numeric" };
     return ("id=" +this.id + " name=" + this.name + ", gender=" + this.gender +", profilePic=" + this.profilePic + ", department=" + this.department + ", salary=" + this.salary +", startDate=" + this.startDate + ", note=" + this.note );
   }
 }
@@ -120,8 +119,9 @@ const creaateEmployeePayroll = () => {
     employeePayrollData.department = getSelectedValues("[name=department]");
     employeePayrollData.salary = getInputValueById("#salary");
     employeePayrollData.note = getInputValueById("#notes");
-    let date = `${getInputValueById("#day")}/${getInputValueById("#month")}/${getInputValueById("#year")}`;
-    employeePayrollData.date = date;
+    let givenDate = `${getInputValueById("#day")}/${getInputValueById("#month")}/${getInputValueById("#year")}`;
+    employeePayrollData.startDate = givenDate;
+    console.log(givenDate);
     alert(employeePayrollData.toString());
     return employeePayrollData;
   };
